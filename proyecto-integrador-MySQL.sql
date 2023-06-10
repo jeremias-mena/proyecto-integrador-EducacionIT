@@ -1,5 +1,6 @@
 -- Etapa 1.1
 -- 1. Crear una base de datos con el nombre LABORATORIO. En el caso de que la base de datos exista previamente, eliminarla antes de iniciar el laboratorio.
+DROP DATABASE IF EXISTS LABORATORIO;
 CREATE DATABASE LABORATORIO;
 
 -- 2. Poner en uso la base de datos generada en el paso anterior.
@@ -44,7 +45,39 @@ SHOW DATABASES;
 -- 7. Mostrar un listado de todas las tablas generadas anteriormente dentro de la base de datos con el nombre LABORATORIO.
 SHOW TABLES;
 -- 8. Comentar la instrucción que lista las tablas contenidas dentro de la base de datos LABORATORIO.
--- # SHOW TABLES;
+-- SHOW TABLES;
 -- 9. Describir la estructura de la tabla CLIENTES.
 DESCRIBE CLIENTES; 
--- # DESC CLIENTES;
+-- DESC CLIENTES;
+
+-- Etapa 1.2
+-- 1. Modificar la tabla FACTURAS tomando en cuenta las siguientes consideraciones:
+    -- a. Cambiar el nombre del campo ClienteID por IDCliente, manteniendo su tipo de dato y restricciones ya definidas.
+    -- b. Cambiar el nombre del campo ArticuloID por IDArticulo, manteniendo su tipo de dato y restricciones ya definidas.
+    -- c. Asignar la restricción UNSIGNED al campo Monto, manteniendo el tipo de dato ya definido para el campo.
+ALTER TABLE FACTURAS 
+CHANGE clienteID idCliente int,
+CHANGE articuloID idArticulo int,
+MODIFY monto float UNSIGNED;
+
+-- 2. Modificar la tabla ARTICULOS tomando en cuenta las siguientes consideraciones:
+    -- a. Cambiar el nombre del campo ArticuloID por IDArticulo, manteniendo su tipo de dato y restricciones ya definidas.
+    -- b. Cambiar el tipo de dato del campo Nombre para que admita hasta 75 caracteres.
+    -- c. Asignar las restricciones UNSIGNED y NOT NULL al campo Precio, manteniendo el tipo de dato ya definido para el campo.
+    -- d. Asignar las restricciones UNSIGNED y NOT NULL al campo Stock, manteniendo el tipo de dato ya definido para el campo.
+ALTER TABLE ARTICULOS 
+CHANGE ArticuloID idArticulo int,
+MODIFY nombre varchar(75),
+MODIFY precio float UNSIGNED NOT NULL,
+MODIFY stock float UNSIGNED NOT NULL;
+
+-- 3. Modificar la tabla CLIENTES. Tomar en cuenta las siguientes consideraciones:
+    -- a. Cambiar el nombre del campo ClienteID por IDCliente, manteniendo su tipo de dato y restricciones ya definidas.
+    -- b. Cambiar el tipo de dato del campo Nombre para que admita hasta 30 caracteres y asigne la restricción correspondiente para que su carga sea obligatoria.
+    -- c. Cambiar el tipo de dato del campo Apellido para que admita hasta 35 caracteres y asigne la restricción correspondiente para que su carga sea obligatoria.
+    -- d. Cambiar el nombre del campo Comentarios por Observaciones y su tipo de dato para que admita hasta 255 caracteres. 
+ALTER TABLE CLIENTES 
+CHANGE ClienteID idCliente int,
+MODIFY nombre varchar(30) NOT NULL,
+MODIFY apellido varchar(35) NOT NULL,
+CHANGE comentarios observaciones varchar(255);  
