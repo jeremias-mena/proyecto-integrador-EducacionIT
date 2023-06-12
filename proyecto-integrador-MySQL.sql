@@ -103,5 +103,30 @@ INSERT INTO CLIENTES VALUES(5, 'Santiago', 'González', '23-24582359-9', 'Uribur
                             50, 'Micaela', 'Altieri', '23-22885566-5', 'Santamarina 1255', 'GBA'
 );
 
+-- Desafíos
+-- 1. Crear una base de datos con el nombre BONUS_TRACK.
+DROP DATABASE IF EXISTS  BONUS_TRACK;
+CREATE DATABASE BONUS_TRACK;
+-- 2. Poner en uso la base de datos generada en el paso anterior.
+USE BONUS_TRACK;
+-- 3. Crear una tabla con el nombre “AGENDA” dentro de la base de datos, con la estructura que se muestra en la siguiente diapositiva.
+CREATE TABLE AGENDA (idContacto integer,
+nombre varchar(20) NOT NULL,
+apellido varchar(15) NOT NULL,
+domicilio varchar(50),
+telefono varchar(50) NOT NULL,
+primary key(idContacto)
+);
+-- 4. Comentar el código SQL generado para la creación de la tabla “AGENDA”.
+-- 5. Visualizar las tablas existentes en la base de datos para verificar la creación de la tabla “AGENDA”.
+-- 6. Visualizar la estructura de la tabla “AGENDA”.
+SHOW TABLES;
+-- 7. Agregar el campo MAIL a la tabla. Este campo deberá contener como máximo 50 caracteres y su carga es obligatoria.
+ALTER TABLE AGENDA ADD mail varchar(50) NOT NULL;
+-- 8. Insertar 4 registros en la tabla “AGENDA”.
+INSERT INTO AGENDA VALUES (1, 'Jeremías', 'Mena', '25 de mayo 382', '3442534756','jere_mena3@gmail.com'),
+						   (2, 'Mauro', 'Sander', 'Artigas 547', '3447896075','xlrmauro@hotmail.com'),
+                           (3, 'José', 'Albaturvich', '9 de julio 832', '3442584156','joseph899@gmail.com'),
+						   (4, 'Florencia', 'Bermudez', 'J.D. Perón  897', '3442453678', 'flor_ber45@gmail.com');
 
 
