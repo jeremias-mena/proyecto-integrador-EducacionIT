@@ -137,16 +137,16 @@ INSERT INTO AGENDA VALUES (1, 'Jeremías', 'Mena', '25 de mayo 382', '3442534756
 -- 2. Llevar a cabo los siguientes cambios en la tabla CLIENTES_NEPTUNO importada anteriormente. Respetar las consignas detalladas a continuación 
 -- y utilizar el comando ALTER TABLE:
 -- a. Campo IDCliente: debe ser de tipo VARCHAR, debe admitir hasta 5 caracteres como máximo y debe ser el campo PRIMARY KEY de la tabla.
-ALTER TABLE CLIENTES_NEPTUNO
+ALTER TABLE clientes_neptuno
 MODIFY IDCliente varchar(5) PRIMARY KEY;
 -- b. Campo NombreCompania: debe ser de tipo VARCHAR, debe admitir hasta 100 caracteres como máximo y no puede quedar vacío.
-ALTER TABLE CLIENTES_NEPTUNO
+ALTER TABLE clientes_neptuno
 MODIFY NombreCompania varchar(100) NOT NULL;
 -- c. Campo Pais: debe ser de tipo VARCHAR, debe admitir hasta 15 caracteres como máximo y no puede quedar vacío.
-ALTER TABLE CLIENTES_NEPTUNO
+ALTER TABLE clientes_neptuno
 MODIFY Pais varchar(15) NOT NULL;
 -- 3. Cambiar el nombre de la tabla CLIENTES por CONTACTOS.
-RENAME TABLE CLIENTES TO CONTACTOS;
+RENAME TABLE clientes_neptuno TO CONTACTOS;
 -- 4. Importar el archivo CSV con el nombre CLIENTES a la base de datos LABORATORIO. Y tener en cuenta las siguientes indicaciones:
 -- a. Este archivo lo encontrarás disponible en el área de descargas del presente módulo.
 -- b. No cambiar el nombre de la tabla.
@@ -155,20 +155,20 @@ RENAME TABLE CLIENTES TO CONTACTOS;
 -- 5. Llevar a cabo los siguientes cambios en la tabla CLIENTES importada anteriormente.
 -- Respetar las consignas detalladas a continuación y utiliza el comando ALTER TABLE:
 -- a. Campo Cod_Cliente: debe ser de tipo VARCHAR, debe admitir hasta 7 caracteres como máximo y debe ser el campo PRIMARY KEY de la tabla.
-ALTER TABLE CLIENTES
-MODIFY Cod_Clientes varchar(7) PRIMARY KEY;
+ALTER TABLE clientes
+MODIFY COD_CLIENTE varchar(7) PRIMARY KEY;
 -- b. Campo Empresa: debe ser de tipo VARCHAR, debe admitir hasta 100 caracteres como máximo y no puede quedar vacío.
-ALTER TABLE CLIENTES
-MODIFY Empresa varchar(100) NOT NULL;
+ALTER TABLE clientes
+MODIFY EMPRESA varchar(100) NOT NULL;
 -- c. Campo Ciudad: debe ser de tipo VARCHAR, debe admitir hasta 25 caracteres como máximo y no puede quedar vacío.
-ALTER TABLE CLIENTES
-MODIFY Ciudad varchar(25) NOT NULL;
+ALTER TABLE clientes
+MODIFY CIUDAD varchar(25) NOT NULL;
 -- d. Campo Telefono: debe ser de tipo INT y no debe admitir valores numéricos negativos.
-ALTER TABLE CLIENTES
-MODIFY Telefono integer CHECK (Telefono > 0); -- Correcto: MODIFY Telefono integer UNSIGNED;
+ALTER TABLE clientes
+MODIFY TELEFONO integer CHECK (Telefono > 0); -- Correcto: MODIFY Telefono integer UNSIGNED;
 -- e. Campo Responsable: debe ser de tipo VARCHAR y debe admitir como máximo hasta 30 caracteres.
-ALTER TABLE CLIENTES
-MODIFY Responsable varchar(30);
+ALTER TABLE clientes
+MODIFY RESPONSABLE varchar(30);
 
 -- 6. Importar el archivo CSV con el nombre PEDIDOS a la base de datos LABORATORIO. Y tener en cuenta las siguientes indicaciones:
 -- a. Este archivo lo encontrarás disponible en el área de descargas del presente módulo.
@@ -177,12 +177,20 @@ MODIFY Responsable varchar(30);
 
 -- 7. Llevar a cabo los siguientes cambios en la tabla PEDIDOS importada anteriormente. Respetar las consignas detalladas a continuación y utilizar el comando ALTER TABLE:
 -- a. Campo Numero_Pedido: debe ser de tipo INT, sólo debe aceptar valores numéricos enteros y debe ser el campo PRIMARY KEY de la tabla.
-ALTER TABLE PEDIDOS 
-MODIFY Numero_Pedido integer UNSIGNED PRIMARY KEY;
+ALTER TABLE pedidos 
+MODIFY NUMERO_PEDIDO integer UNSIGNED PRIMARY KEY;
 -- b. Campo Codigo_Cliente: debe ser de tipo VARCHAR, debe admitir hasta 7 caracteres como máximo y no puede quedar vacío.
+ALTER TABLE pedidos
+MODIFY CODIGO_CLIENTE varchar(7) NOT NULL;
 -- c. Campo Fecha_Pedido: debe ser de tipo DATE y su carga es obligatoria.
+ALTER TABLE pedidos
+MODIFY FECHA_PEDIDO date NOT NULL;
 -- d. Campo Forma_Pago: sólo debe admitir la carga de los valores APLAZADO, CONTADO o TARJETA.
+ALTER TABLE pedidos
+MODIFY FORMA_PAGO ENUM ("APLAZADO","CONTADO","TARJETA"); 
 -- e. Campo Enviado: sólo debe admitir la carga de los valores SI o NO.
+ALTER TABLE pedidos
+MODIFY ENVIADO ENUM("SI", "NO");
 
 -- 8. Importar el archivo CSV: PRODUCTOS a la base de datos LABORATORIO. Y tener en cuenta las siguientes indicaciones:
 -- a. Este archivo lo encontrarás disponible en el área de descargas del presente módulo.
@@ -192,10 +200,53 @@ MODIFY Numero_Pedido integer UNSIGNED PRIMARY KEY;
 -- 9. Llevar a cabo los siguientes cambios en la tabla PRODUCTOS importada en el paso anterior. Respetar las consignas detalladas a continuación, 
 -- utilizando el comando ALTER TABLE:
 -- a. Campo Cod_Producto: debe ser de tipo INT, sólo debe aceptar valores numéricos enteros y debe ser el campo PRIMARY KEY de la tabla.
+ALTER TABLE productos 
+MODIFY COD_PRODUCTO integer unsigned primary key;
 -- b. Campo Seccion: debe ser de tipo VARCHAR, debe admitir hasta 20 caracteres como máximo y no puede quedar vacío.
+ALTER TABLE productos
+MODIFY SECCION varchar(20) NOT NULL;
 -- c. Campo Nombre: debe ser de tipo VARCHAR, debe admitir hasta 40 caracteres como máximo y no puede quedar vacío.
+ALTER TABLE productos
+MODIFY NOMBRE varchar(40) NOT NULL;
 -- d. Campo Importado: sólo debe admitir la carga de los valores VERDADERO o FALSO.
+ALTER TABLE productos
+MODIFY IMPORTADDO enum("VERDADERO", "FALSO");
 -- e. Campo Origen: debe ser de tipo VARCHAR, admitir hasta 25 caracteres y ser de carga obligatoria.
+ALTER TABLE productos
+modify ORIGEN varchar(25) NOT NULL;
 -- f. Campos Dia, Mes y Ano: deben ser de tipo INT, positivos y de carga obligatoria.
+ALTER TABLE productos
+MODIFY DIA integer unsigned not NULL,
+MODIFY MES integer unsigned not NULL,
+MODIFY ANO integer unsigned not NULL;
 
+-- Etapa 2.2
+-- 1. Abrir el archivo con formato SQL con el nombre NACIMIENTOS* desde MySQL Workbench. (Este archivo lo encontrarás disponible en el área 
+-- de Descargas del presente módulo).
+-- 2. Ejecutar el código.
+-- 3. Actualizar los esquemas para corroborar la generación de la tabla NACIMIENTOS dentro de la base de datos LABORATORIO.
+-- 4. Abrir el archivo con formato SQL con el nombre PEDIDOS_NEPTUNO desde MySQL Workbench.
+-- 5. Ejecutar el código.
+-- 6. Abrir el archivo con formato SQL con el nombre TABLAS_EXTRAS desde MySQL Workbench.
+-- 7. Ejecutar el código.
+-- 8. Actualizar los esquemas para corroborar la generación de la tabla PEDIDOS_NEPTUNO dentro de la base de datos LABORATORIO.
+-- 9. Cerrar los scripts con los nombres NACIMIENTOS, PEDIDOS NEPTUNO y TABLAS EXTRAS.
 
+-- Etapa 2.3
+-- 1. Mostrar todo el contenido de la tabla CLIENTES_NEPTUNO importada en el laboratorio anterior.
+SELECT * FROM contactos;
+-- 2. Mostrar todos los registros de la tabla CLIENTES_NEPTUNO. En el resultado de la consulta sólo se deben observar las columnas NOMBRECOMPANIA, CIUDAD y PAIS.
+SELECT NOMBRECOMPANIA, CIUDAD, PAIS FROM contactos;
+-- 3. Mostrar todos los registros de la tabla CLIENTES_NEPTUNO. En el resultado de la consulta sólo se deben observar las columnas NOMBRECOMPANIA, CIUDAD y PAIS.
+-- Luego, ordenar alfabéticamente el resultado de la consulta por los nombres de los países.
+SELECT NOMBRECOMPANIA, CIUDAD, PAIS FROM contactos ORDER BY PAIS;
+-- 4. Mostrar todos los registros de la tabla CLIENTES_NEPTUNO. En el resultado de la consulta sólo se deben observar las columnas NOMBRECOMPANIA, CIUDAD y PAIS.
+-- Ordenar el resultado de la consulta alfabéticamente por los nombres de los países. Para aquellos países que se repiten, ordenar las ciudades alfabéticamente.
+SELECT NOMBRECOMPANIA, CIUDAD, PAIS FROM contactos ORDER BY PAIS, CIUDAD;
+-- 5. Mostrar todos los registros de la tabla CLIENTES_NEPTUNO. En el resultado de la consulta sólo se deben observar las columnas NOMBRECOMPANIA, CIUDAD y PAIS.
+-- Ordenar de manera alfabética el resultado de la consulta, por los nombres de los países. Mostrar únicamente los 10 primeros clientes.
+SELECT NOMBRECOMPANIA, CIUDAD, PAIS FROM contactos ORDER BY PAIS, CIUDAD LIMIT 10;
+-- 6. Mostrar todos los registros de la tabla CLIENTES_NEPTUNO. En el resultado de la consulta sólo se deben observar las columnas NOMBRECOMPANIA, CIUDAD y PAIS.
+-- Ordenar de manera alfabética el resultado de la consulta, por los nombres de los países. 
+-- Mostrar únicamente los clientes ubicados desde la posición 11 hasta la 15.
+SELECT NOMBRECOMPANIA, CIUDAD, PAIS FROM contactos ORDER BY PAIS, CIUDAD LIMIT 5 OFFSET 10;
