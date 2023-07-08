@@ -16,7 +16,7 @@ numero integer,
 clienteID integer,
 articuloID integer,
 fecha date,
-monto float,
+monto double,
 PRIMARY KEY (letra, numero)
 );
 
@@ -24,7 +24,7 @@ PRIMARY KEY (letra, numero)
 CREATE TABLE ARTICULOS(
 articuloID integer,
 nombre varchar(50),
-precio float,
+precio double,
 stock integer,
 PRIMARY KEY(articuloID)
 );
@@ -59,7 +59,7 @@ DESCRIBE CLIENTES;
 ALTER TABLE FACTURAS 
 CHANGE clienteID idCliente int,
 CHANGE articuloID idArticulo int,
-MODIFY monto float UNSIGNED;
+MODIFY monto double UNSIGNED;
 
 -- 2. Modificar la tabla ARTICULOS tomando en cuenta las siguientes consideraciones:
     -- a. Cambiar el nombre del campo ArticuloID por IDArticulo, manteniendo su tipo de dato y restricciones ya definidas.
@@ -69,8 +69,8 @@ MODIFY monto float UNSIGNED;
 ALTER TABLE ARTICULOS 
 CHANGE ArticuloID idArticulo int,
 MODIFY nombre varchar(75),
-MODIFY precio float UNSIGNED NOT NULL,
-MODIFY stock float UNSIGNED NOT NULL;
+MODIFY precio double UNSIGNED NOT NULL,
+MODIFY stock double UNSIGNED NOT NULL;
 
 -- 3. Modificar la tabla CLIENTES. Tomar en cuenta las siguientes consideraciones:
     -- a. Cambiar el nombre del campo ClienteID por IDCliente, manteniendo su tipo de dato y restricciones ya definidas.
@@ -85,22 +85,22 @@ CHANGE comentarios observaciones varchar(255);
 
 -- Etapa 1.3
 -- 1. Cargar 5 registros en la tabla FACTURAS, tal como se detallan a en el pdf "Etapa 1.3"
-INSERT INTO FACTURAS VALUES('A', 28, 14, 335, '2021-03-18', 1589.50,
-							'A', 39, 26, 157, '2021-03-18', 979.75,
-                            'B', 8, 17, 95, '2021-04-25', 513.35,
-                            'B', 12, 5, 411, '2021-05-03', 2385.70,
-                            'B', 19, 50, 157, '2021-05-26', 979.75); 
+INSERT INTO FACTURAS VALUES('A', 28, 14, 335, '2021-03-18', 1589.50),
+							('A', 39, 26, 157, '2021-03-18', 979.75),
+                            ('B', 8, 17, 95, '2021-04-25', 513.35),
+                            ('B', 12, 5, 411, '2021-05-03', 2385.70),
+                            ('B', 19, 50, 157, '2021-05-26', 979.75); 
 -- 2. Cargar 4 registros en la tabla ARTÍCULOS,  tal como se detallan en el pdf "Etapa 1.3"
-INSERT INTO ARTICULOS VALUES(95, 'Webcam con Micrófono Plug and Play', 513.35, 39,
-							157, 'Apple AirPods Pro', 979.75, 152,
-							335, 'Lavasecarropas Automático Samsung', 1589.50, 12,
-							411, 'Gloria Trevi / Gloria / CD+DVD', 2385.70, 2);
+INSERT INTO ARTICULOS VALUES(95, 'Webcam con Micrófono Plug and Play', 513.35, 39),
+							(157, 'Apple AirPods Pro', 979.75, 152),
+							(335, 'Lavasecarropas Automático Samsung', 1589.50, 12),
+							(411, 'Gloria Trevi / Gloria / CD+DVD', 2385.70, 2);
 -- 3. Cargar 5 registros en la tabla CLIENTES,  tal como se detallan en el pdf "Etapa 1.3"
-INSERT INTO CLIENTES VALUES(5, 'Santiago', 'González', '23-24582359-9', 'Uriburu 558 - 7ºA', 'VIP',
-							14, 'Gloria', 'Fernández', '23-35965852-5', 'Constitución 323', 'GBA',
-                            17, 'Gonzalo', 'López', '23-33587416-0', 'Arias 2624', 'GBA',
-                            26, 'Carlos', 'García', '23-42321230-9', 'Pasteur 322 - 2ºC', 'VIP',
-                            50, 'Micaela', 'Altieri', '23-22885566-5', 'Santamarina 1255', 'GBA'
+INSERT INTO CLIENTES VALUES(5, 'Santiago', 'González', '23-24582359-9', 'Uriburu 558 - 7ºA', 'VIP'),
+							(14, 'Gloria', 'Fernández', '23-35965852-5', 'Constitución 323', 'GBA'),
+                            (17, 'Gonzalo', 'López', '23-33587416-0', 'Arias 2624', 'GBA'),
+                            (26, 'Carlos', 'García', '23-42321230-9', 'Pasteur 322 - 2ºC', 'VIP'),
+                            (50, 'Micaela', 'Altieri', '23-22885566-5', 'Santamarina 1255', 'GBA'
 );
 
 -- Desafíos
@@ -128,5 +128,74 @@ INSERT INTO AGENDA VALUES (1, 'Jeremías', 'Mena', '25 de mayo 382', '3442534756
 						   (2, 'Mauro', 'Sander', 'Artigas 547', '3447896075','xlrmauro@hotmail.com'),
                            (3, 'José', 'Albaturvich', '9 de julio 832', '3442584156','joseph899@gmail.com'),
 						   (4, 'Florencia', 'Bermudez', 'J.D. Perón  897', '3442453678', 'flor_ber45@gmail.com');
+-- Etapa 2.1
+-- 1. Importar el archivo CSV con el nombre CLIENTES_NEPTUNO  a la base de datos con el nombre LABORATORIO. Y tener en cuenta las siguientes indicaciones:
+-- a. No cambiar el nombre de la tabla.
+-- b. Eliminar la tabla en el caso de que ya exista dentro de la base de datos.
+-- c. Mantener los tipos de datos asignados al momento de la importación.
+
+-- 2. Llevar a cabo los siguientes cambios en la tabla CLIENTES_NEPTUNO importada anteriormente. Respetar las consignas detalladas a continuación 
+-- y utilizar el comando ALTER TABLE:
+-- a. Campo IDCliente: debe ser de tipo VARCHAR, debe admitir hasta 5 caracteres como máximo y debe ser el campo PRIMARY KEY de la tabla.
+ALTER TABLE CLIENTES_NEPTUNO
+MODIFY IDCliente varchar(5) PRIMARY KEY;
+-- b. Campo NombreCompania: debe ser de tipo VARCHAR, debe admitir hasta 100 caracteres como máximo y no puede quedar vacío.
+ALTER TABLE CLIENTES_NEPTUNO
+MODIFY NombreCompania varchar(100) NOT NULL;
+-- c. Campo Pais: debe ser de tipo VARCHAR, debe admitir hasta 15 caracteres como máximo y no puede quedar vacío.
+ALTER TABLE CLIENTES_NEPTUNO
+MODIFY Pais varchar(15) NOT NULL;
+-- 3. Cambiar el nombre de la tabla CLIENTES por CONTACTOS.
+RENAME TABLE CLIENTES TO CONTACTOS;
+-- 4. Importar el archivo CSV con el nombre CLIENTES a la base de datos LABORATORIO. Y tener en cuenta las siguientes indicaciones:
+-- a. Este archivo lo encontrarás disponible en el área de descargas del presente módulo.
+-- b. No cambiar el nombre de la tabla.
+-- c. Mantener los tipos de datos asignados al momento de la importación.
+
+-- 5. Llevar a cabo los siguientes cambios en la tabla CLIENTES importada anteriormente.
+-- Respetar las consignas detalladas a continuación y utiliza el comando ALTER TABLE:
+-- a. Campo Cod_Cliente: debe ser de tipo VARCHAR, debe admitir hasta 7 caracteres como máximo y debe ser el campo PRIMARY KEY de la tabla.
+ALTER TABLE CLIENTES
+MODIFY Cod_Clientes varchar(7) PRIMARY KEY;
+-- b. Campo Empresa: debe ser de tipo VARCHAR, debe admitir hasta 100 caracteres como máximo y no puede quedar vacío.
+ALTER TABLE CLIENTES
+MODIFY Empresa varchar(100) NOT NULL;
+-- c. Campo Ciudad: debe ser de tipo VARCHAR, debe admitir hasta 25 caracteres como máximo y no puede quedar vacío.
+ALTER TABLE CLIENTES
+MODIFY Ciudad varchar(25) NOT NULL;
+-- d. Campo Telefono: debe ser de tipo INT y no debe admitir valores numéricos negativos.
+ALTER TABLE CLIENTES
+MODIFY Telefono integer CHECK (Telefono > 0); -- Correcto: MODIFY Telefono integer UNSIGNED;
+-- e. Campo Responsable: debe ser de tipo VARCHAR y debe admitir como máximo hasta 30 caracteres.
+ALTER TABLE CLIENTES
+MODIFY Responsable varchar(30);
+
+-- 6. Importar el archivo CSV con el nombre PEDIDOS a la base de datos LABORATORIO. Y tener en cuenta las siguientes indicaciones:
+-- a. Este archivo lo encontrarás disponible en el área de descargas del presente módulo.
+-- b. No cambiar el nombre de la tabla.
+-- c. Mantener los tipos de datos asignados al momento de la importación.
+
+-- 7. Llevar a cabo los siguientes cambios en la tabla PEDIDOS importada anteriormente. Respetar las consignas detalladas a continuación y utilizar el comando ALTER TABLE:
+-- a. Campo Numero_Pedido: debe ser de tipo INT, sólo debe aceptar valores numéricos enteros y debe ser el campo PRIMARY KEY de la tabla.
+ALTER TABLE PEDIDOS 
+MODIFY Numero_Pedido integer UNSIGNED PRIMARY KEY;
+-- b. Campo Codigo_Cliente: debe ser de tipo VARCHAR, debe admitir hasta 7 caracteres como máximo y no puede quedar vacío.
+-- c. Campo Fecha_Pedido: debe ser de tipo DATE y su carga es obligatoria.
+-- d. Campo Forma_Pago: sólo debe admitir la carga de los valores APLAZADO, CONTADO o TARJETA.
+-- e. Campo Enviado: sólo debe admitir la carga de los valores SI o NO.
+
+-- 8. Importar el archivo CSV: PRODUCTOS a la base de datos LABORATORIO. Y tener en cuenta las siguientes indicaciones:
+-- a. Este archivo lo encontrarás disponible en el área de descargas del presente módulo.
+-- b. No cambiar el nombre de la tabla.
+-- c. Mantener los tipos de datos asignados al momento de la importación.
+
+-- 9. Llevar a cabo los siguientes cambios en la tabla PRODUCTOS importada en el paso anterior. Respetar las consignas detalladas a continuación, 
+-- utilizando el comando ALTER TABLE:
+-- a. Campo Cod_Producto: debe ser de tipo INT, sólo debe aceptar valores numéricos enteros y debe ser el campo PRIMARY KEY de la tabla.
+-- b. Campo Seccion: debe ser de tipo VARCHAR, debe admitir hasta 20 caracteres como máximo y no puede quedar vacío.
+-- c. Campo Nombre: debe ser de tipo VARCHAR, debe admitir hasta 40 caracteres como máximo y no puede quedar vacío.
+-- d. Campo Importado: sólo debe admitir la carga de los valores VERDADERO o FALSO.
+-- e. Campo Origen: debe ser de tipo VARCHAR, admitir hasta 25 caracteres y ser de carga obligatoria.
+-- f. Campos Dia, Mes y Ano: deben ser de tipo INT, positivos y de carga obligatoria.
 
 
